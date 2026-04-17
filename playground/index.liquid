@@ -62,7 +62,7 @@ description: "Write lykn, see the compiled JavaScript, run it — all in your br
   (Point))
 
 (func area
-  :args ((s :Shape))
+  :args (:Shape s)
   :returns :number
   :body
   (match s
@@ -83,7 +83,7 @@ description: "Write lykn, see the compiled JavaScript, run it — all in your br
   (->> #a(1 2 3 4 5 6 7 8 9 10)
     (:filter (fn (:number n) (= (% n 2) 0)))
     (:map (fn (:number n) (* n 10)))
-    (:reduce + 0)))
+    (:reduce (fn (:number a :number b) (+ a b)) 0)))
 
 (console:log "Sum of evens×10:" result)`
   };

@@ -390,6 +390,8 @@ a:hover {
 .with-sidebar>.sidebar {
     flex-basis: 20rem;
     flex-grow: 1;
+    min-inline-size: 0;
+    overflow: hidden;
 }
 
 .with-sidebar>.not-sidebar {
@@ -975,10 +977,16 @@ body:not(.region-home) .site-header::before {
 
 .lykn-output {
     min-block-size: 14rem;
+    max-block-size: 24rem;
+    max-inline-size: 100%;
+    overflow: auto;
 }
 
 .lykn-console {
     min-block-size: 4rem;
+    max-block-size: 12rem;
+    max-inline-size: 100%;
+    overflow: auto;
     color: var(--syn-fn);
 }
 
