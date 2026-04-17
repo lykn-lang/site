@@ -1,1 +1,8 @@
+*#*.md#
+.#*.md
+*.md~
+/book
+/.claude*
 /workbench
+.DS_Store
+_site

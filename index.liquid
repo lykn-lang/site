@@ -1,0 +1,128 @@
+---
+layout: default.liquid
+title: "lykn — Lisp Flavoured JavaScript"
+description: "S-expression syntax compiling to clean, readable JavaScript. No runtime. No magic. Just parentheses."
+---
+
+<!-- ═══ Zone 1: The Encounter ═══ -->
+
+<section class="hero-encounter">
+  <div class="hero-bg"></div>
+  <div class="hero-content center stack" style="--center-max: 48rem; --space: var(--space-l);">
+    <div class="stack" style="--space: var(--space-xs);">
+      <h1 class="hero-title">lykn</h1>
+      <p class="hero-tagline">Lisp Flavoured JavaScript</p>
+      <p class="hero-pitch">S-expression syntax compiling to clean, readable JS.<br>No runtime. No magic. Just parentheses.</p>
+    </div>
+
+    <div class="code-pair">
+      <div>
+        <p class="code-label">lykn</p>
+        <pre><code><span class="sc">;; Type-checked at dev time, zero-cost in production</span>
+(<span class="sk">func</span> <span class="sf">greet</span>
+  <span class="st">:args</span> ((<span class="sf">name</span> <span class="st">:string</span>))
+  <span class="st">:returns</span> <span class="st">:string</span>
+  <span class="st">:body</span> (<span class="sk">template</span> <span class="ss">"Hello, "</span> name <span class="ss">"!"</span>))
+
+(<span class="sf">console:log</span> (<span class="sf">greet</span> <span class="ss">"world"</span>))</code></pre>
+      </div>
+      <div>
+        <p class="code-label">compiled javascript</p>
+        <pre><code><span class="sc">// Runtime checks in dev, stripped in production</span>
+<span class="sk">function</span> <span class="sf">greet</span>(name) {
+  <span class="sk">if</span> (<span class="sk">typeof</span> name !== <span class="ss">"string"</span>)
+    <span class="sk">throw new</span> <span class="sf">TypeError</span>(<span class="sc">/* ... */</span>);
+
+  <span class="sk">const</span> result = <span class="ss">`Hello, ${</span>name<span class="ss">}!`</span>;
+  <span class="sk">return</span> result;
+}
+<span class="sf">console</span>.<span class="sf">log</span>(<span class="sf">greet</span>(<span class="ss">"world"</span>));</code></pre>
+      </div>
+    </div>
+
+    <div class="install-cmd">
+      <span class="prompt">$</span> cargo install lykn
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ Zone 2: The Three Doors ═══ -->
+
+<section class="three-doors page-wrap">
+  <div class="switcher">
+
+    <a href="/tour/" class="door">
+      <p class="door-title">
+        <span class="door-icon" style="--door-icon: var(--door-icon-learn);"></span>
+        Learn
+      </p>
+      <p class="door-desc">Walk through the language in 15 interactive examples. Every one compiles live in your browser.</p>
+      <pre><code><span class="sc">;; Pattern matching with exhaustiveness</span>
+(<span class="sk">type</span> <span class="sf">Shape</span>
+  (<span class="sf">Circle</span> <span class="st">:number</span> radius)
+  (<span class="sf">Rect</span>   <span class="st">:number</span> w <span class="st">:number</span> h))
+
+(<span class="sk">func</span> <span class="sf">area</span>
+  (<span class="st">:args</span> ((<span class="sf">s</span> <span class="st">:Shape</span>)) <span class="st">:returns</span> <span class="st">:number</span>
+   <span class="st">:body</span> (<span class="sk">match</span> s
+     ((<span class="sf">Circle</span> r) (* <span class="sf">Math:PI</span> r r))
+     ((<span class="sf">Rect</span> w h) (* w h)))))</code></pre>
+    </a>
+
+    <a href="/reference/" class="door">
+      <p class="door-title">
+        <span class="door-icon" style="--door-icon: var(--door-icon-build);"></span>
+        Build
+      </p>
+      <p class="door-desc">Every form, every syntax, every compilation rule. The complete reference for working developers.</p>
+      <pre><code><span class="sc">;; Controlled mutation with cells</span>
+(<span class="sk">bind</span> count (<span class="sk">cell</span> <span class="sn">0</span>))
+(<span class="sf">swap!</span> count (<span class="sk">fn</span> (<span class="st">:number</span> n) (+ n <span class="sn">1</span>)))
+(<span class="sf">console:log</span> (<span class="sf">express</span> count))
+<span class="sc">;; → 1</span></code></pre>
+    </a>
+
+    <a href="/playground/" class="door">
+      <p class="door-title">
+        <span class="door-icon" style="--door-icon: var(--door-icon-explore);"></span>
+        Explore
+      </p>
+      <p class="door-desc">Write lykn, see the compiled JavaScript, run it. All in your browser, nothing to install.</p>
+      <pre><code><span class="sc">;; Threading macros for pipelines</span>
+(<span class="sk">-></span> data
+  (<span class="sf">JSON:parse</span>)
+  (<span class="sf">transform</span>)
+  (<span class="sf">JSON:stringify</span> <span class="sk">null</span> <span class="sn">2</span>)
+  (<span class="sf">console:log</span>))</code></pre>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ═══ Zone 3: The Lineage ═══ -->
+
+<section class="lineage page-wrap center" style="--center-max: 52rem;">
+  <h2>What Lykn Learned</h2>
+  <ul class="lineage-list">
+    <li class="lineage-item">
+      From <strong>Scheme</strong> — the irreducible core. Five forms from which everything derives. Lykn's kernel follows this: a small set of forms mapping to JavaScript.
+    </li>
+    <li class="lineage-item">
+      From <strong>Common Lisp</strong> — keywords (<code>:name</code>), the colon-package convention adapted to <code>obj:prop</code>. Practical macros, <code>defmacro</code> style.
+    </li>
+    <li class="lineage-item">
+      From <strong>Clojure</strong> — threading macros (<code>-></code>, <code>->></code>), immutability by default, atoms renamed to <code>cell</code>. The <code>!</code> convention for mutation.
+    </li>
+    <li class="lineage-item">
+      From <strong>Erlang/LFE</strong> — multi-clause function dispatch. Pattern matching. The functional commitment. The thin-skin-over-host philosophy.
+    </li>
+    <li class="lineage-item">
+      From <strong>Rust</strong> — <code>Option</code>/<code>Result</code> types, exhaustiveness checking, <code>Cell&lt;T&gt;</code> naming. Making illegal states unrepresentable.
+    </li>
+    <li class="lineage-item">
+      From <strong>Fennel</strong> — proof that the thin-skin approach works. No runtime. Compile-time macros. Small compiler. Clean output.
+    </li>
+  </ul>
+</section>

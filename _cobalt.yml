@@ -1,7 +1,35 @@
+# lykn.pl site configuration
+# Built with Cobalt (https://cobalt-org.github.io)
+
+source: "."
+destination: _site
+ignore:
+  - workbench
+  - workbench/**/*
+  - README.md
+  - LICENSE
+template_extensions:
+  - md
+  - liquid
+  - html
+include_drafts: false
 
 site:
-  title: cobalt blog
-  description: Blog Posts Go Here
-  base_url: http://example.com
+  title: "lykn"
+  description: "Lisp Flavoured JavaScript — s-expression syntax compiling to clean, readable JS"
+  base_url: "https://lykn.pl"
+
+default:
+  excerpt_separator: "\n\n"
+
+pages:
+  default: {}
+
 posts:
+  title: "Blog"
+  description: "Updates from the lykn project"
+  dir: posts
+  drafts_dir: _drafts
+  order: Desc
   rss: rss.xml
+  default: {}

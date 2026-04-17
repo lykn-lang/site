@@ -1,0 +1,132 @@
+---
+layout: default.liquid
+title: "Playground"
+description: "Write lykn, see the compiled JavaScript, run it — all in your browser."
+---
+
+<div class="center" style="--center-max: 64rem;">
+  <div class="stack page-block" style="--space: var(--space-m);">
+
+    <div class="stack" style="--space: var(--space-2xs);">
+      <p class="caption">Playground</p>
+      <h1>Try lykn</h1>
+      <p class="subtitle">Write lykn in the editor. See the compiled JavaScript. Run it. Nothing to install.</p>
+    </div>
+
+    <div class="cluster" style="--space: var(--space-2xs);">
+      <span class="playground-label">Load example:</span>
+      <button class="btn-chip" type="button" data-example="hello">Hello World</button>
+      <button class="btn-chip" type="button" data-example="types">Types + Match</button>
+      <button class="btn-chip" type="button" data-example="cells">Cells</button>
+      <button class="btn-chip" type="button" data-example="threading">Threading</button>
+    </div>
+
+    <div class="with-sidebar" style="--space: var(--space-xs);">
+      <div class="not-sidebar">
+        <div class="stack" style="--space: var(--space-3xs);">
+          <p class="code-label">lykn source</p>
+          <textarea id="lykn-input" class="lykn-editor" spellcheck="false">(bind greeting "Hello, World!")
+(console:log greeting)</textarea>
+          <div class="cluster" style="--space: var(--space-2xs);">
+            <button class="btn-primary" type="button" data-action="compile-and-run">Compile &amp; Run</button>
+            <button class="btn-secondary" type="button" data-action="compile-only">Compile Only</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="stack" style="--space: var(--space-s);">
+          <div class="stack" style="--space: var(--space-3xs);">
+            <p class="code-label">compiled javascript</p>
+            <pre id="js-output" class="lykn-output"><code>// Compiled output appears here</code></pre>
+          </div>
+          <div class="stack" style="--space: var(--space-3xs);">
+            <p class="code-label">console output</p>
+            <pre id="console-output" class="lykn-console"><code>// Run output appears here</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(() => {
+  const EXAMPLES = {
+    hello: `(bind greeting "Hello, World!")
+(console:log greeting)`,
+    types: `(type Shape
+  (Circle :number radius)
+  (Rect :number w :number h)
+  (Point))
+
+(func area
+  :args ((s :Shape))
+  :returns :number
+  :body
+  (match s
+    ((Circle r) (* Math:PI r r))
+    ((Rect w h) (* w h))
+    ((Point) 0)))
+
+(console:log (area (Circle 5)))
+(console:log (area (Rect 3 4)))`,
+    cells: `(bind counter (cell 0))
+
+(swap! counter (fn (:number n) (+ n 1)))
+(swap! counter (fn (:number n) (+ n 1)))
+(swap! counter (fn (:number n) (+ n 1)))
+
+(console:log "Count:" (express counter))`,
+    threading: `(bind result
+  (->> #a(1 2 3 4 5 6 7 8 9 10)
+    (:filter (fn (:number n) (= (% n 2) 0)))
+    (:map (fn (:number n) (* n 10)))
+    (:reduce + 0)))
+
+(console:log "Sum of evens×10:" result)`
+  };
+
+  const input = document.getElementById('lykn-input');
+  const jsOut = document.getElementById('js-output').querySelector('code');
+  const consoleOut = document.getElementById('console-output').querySelector('code');
+
+  function compileOnly() {
+    try {
+      if (typeof lykn === 'undefined' || !lykn.compile) {
+        jsOut.textContent = '// lykn-browser.js not loaded';
+        return null;
+      }
+      const js = lykn.compile(input.value);
+      jsOut.textContent = js;
+      return js;
+    } catch (e) {
+      jsOut.textContent = '// Compile error: ' + e.message;
+      return null;
+    }
+  }
+
+  function compileAndRun() {
+    const js = compileOnly();
+    if (js === null) return;
+    const lines = [];
+    const fakeConsole = { log: (...args) => lines.push(args.join(' ')) };
+    try {
+      new Function('console', js)(fakeConsole);
+      consoleOut.textContent = lines.join('\n') || '// (no output)';
+    } catch (e) {
+      consoleOut.textContent = '// Runtime error: ' + e.message;
+    }
+  }
+
+  document.querySelectorAll('[data-example]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      input.value = EXAMPLES[btn.dataset.example] || '';
+    });
+  });
+
+  document.querySelector('[data-action="compile-only"]').addEventListener('click', compileOnly);
+  document.querySelector('[data-action="compile-and-run"]').addEventListener('click', compileAndRun);
+})();
+</script>

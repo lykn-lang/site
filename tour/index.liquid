@@ -1,0 +1,365 @@
+---
+layout: default.liquid
+title: "Language Tour"
+description: "Walk through lykn in 10 interactive examples. Every one compiles to clean JavaScript."
+---
+
+<div class="center" style="--center-max: 56rem;">
+  <div class="stack page-block" style="--space: var(--space-xl);">
+
+    <div class="stack" style="--space: var(--space-2xs);">
+      <p class="caption">Language Tour</p>
+      <h1>Learn lykn in 10 Examples</h1>
+      <p class="subtitle">Each example shows the lykn source and its compiled JavaScript output.<br>No runtime, no magic — just parentheses in, clean JS out.</p>
+    </div>
+
+
+    <!-- ─── 1. Hello World ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">1 · Bindings</p>
+        <h2>Hello, World</h2>
+      </div>
+      <p><code>bind</code> creates an immutable binding. It compiles to <code>const</code> — always. Colon syntax (<code>console:log</code>) compiles to dot notation.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">bind</span> greeting <span class="ss">"Hello, World!"</span>)
+(<span class="sf">console:log</span> greeting)</code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">const</span> greeting = <span class="ss">"Hello, World!"</span>;
+<span class="sf">console</span>.<span class="sf">log</span>(greeting);</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 2. Functions ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">2 · Functions</p>
+        <h2>Named Functions with Contracts</h2>
+      </div>
+      <p><code>func</code> defines named functions with keyword-labeled clauses. Type annotations compile to runtime checks in development, stripped in production.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">func</span> <span class="sf">greet</span>
+  <span class="st">:args</span> ((<span class="sf">name</span> <span class="st">:string</span>))
+  <span class="st">:returns</span> <span class="st">:string</span>
+  <span class="st">:body</span>
+  (<span class="sk">template</span> <span class="ss">"Hello, "</span> name <span class="ss">"!"</span>))
+
+(<span class="sf">console:log</span> (<span class="sf">greet</span> <span class="ss">"world"</span>))</code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">function</span> <span class="sf">greet</span>(name) {
+  <span class="sk">if</span> (<span class="sk">typeof</span> name !== <span class="ss">"string"</span>)
+    <span class="sk">throw new</span> <span class="sf">TypeError</span>(<span class="sc">/* ... */</span>);
+  <span class="sk">const</span> result = <span class="ss">`Hello, ${</span>name<span class="ss">}!`</span>;
+  <span class="sk">return</span> result;
+}
+<span class="sf">console</span>.<span class="sf">log</span>(<span class="sf">greet</span>(<span class="ss">"world"</span>));</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 3. Anonymous Functions ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">3 · Lambdas</p>
+        <h2>Anonymous Functions</h2>
+      </div>
+      <p><code>fn</code> creates arrow functions. Type annotations work the same way. Use them everywhere a callback is needed.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">bind</span> numbers #a(<span class="sn">1 2 3 4 5</span>))
+
+(<span class="sk">bind</span> doubled
+  (numbers:<span class="sf">map</span>
+    (<span class="sk">fn</span> (<span class="st">:number</span> x) (* x <span class="sn">2</span>))))
+
+(<span class="sf">console:log</span> doubled)
+<span class="sc">;; → [2, 4, 6, 8, 10]</span></code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">const</span> numbers = [<span class="sn">1</span>, <span class="sn">2</span>, <span class="sn">3</span>, <span class="sn">4</span>, <span class="sn">5</span>];
+
+<span class="sk">const</span> doubled =
+  numbers.<span class="sf">map</span>(
+    (x) => x * <span class="sn">2</span>);
+
+<span class="sf">console</span>.<span class="sf">log</span>(doubled);
+<span class="sc">// → [2, 4, 6, 8, 10]</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 4. Closures ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">4 · Closures</p>
+        <h2>Functions Remember Their Context</h2>
+      </div>
+      <p>Because <code>bind</code> is immutable, closures are safe. The captured value never changes behind the function's back.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">func</span> <span class="sf">make-greeter</span>
+  <span class="st">:args</span> ((<span class="sf">prefix</span> <span class="st">:string</span>))
+  <span class="st">:returns</span> <span class="st">:function</span>
+  <span class="st">:body</span>
+  (<span class="sk">fn</span> (<span class="st">:string</span> name)
+    (<span class="sk">template</span> prefix <span class="ss">", "</span> name <span class="ss">"!"</span>)))
+
+(<span class="sk">bind</span> hello (<span class="sf">make-greeter</span> <span class="ss">"Hello"</span>))
+(<span class="sf">console:log</span> (hello <span class="ss">"World"</span>))
+<span class="sc">;; → "Hello, World!"</span></code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">function</span> <span class="sf">makeGreeter</span>(prefix) {
+  <span class="sk">return</span> (name) =>
+    <span class="ss">`${</span>prefix<span class="ss">}, ${</span>name<span class="ss">}!`</span>;
+}
+
+<span class="sk">const</span> hello = <span class="sf">makeGreeter</span>(<span class="ss">"Hello"</span>);
+<span class="sf">console</span>.<span class="sf">log</span>(<span class="sf">hello</span>(<span class="ss">"World"</span>));
+<span class="sc">// → "Hello, World!"</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 5. Algebraic Data Types ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">5 · Types</p>
+        <h2>Algebraic Data Types</h2>
+      </div>
+      <p><code>type</code> defines variants with named, typed fields. Each variant compiles to a constructor function returning a tagged object. Zero-field variants are constants.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">type</span> <span class="sf">Shape</span>
+  (<span class="sf">Circle</span> <span class="st">:number</span> radius)
+  (<span class="sf">Rect</span>   <span class="st">:number</span> w <span class="st">:number</span> h)
+  (<span class="sf">Point</span>))
+
+(<span class="sk">bind</span> s (<span class="sf">Circle</span> <span class="sn">5</span>))
+<span class="sc">;; → { tag: "Circle", radius: 5 }</span></code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">function</span> <span class="sf">Circle</span>(radius) {
+  <span class="sc">/* type check in dev */</span>
+  <span class="sk">return</span> { tag: <span class="ss">"Circle"</span>, radius };
+}
+<span class="sk">function</span> <span class="sf">Rect</span>(w, h) {
+  <span class="sk">return</span> { tag: <span class="ss">"Rect"</span>, w, h };
+}
+<span class="sk">const</span> <span class="sf">Point</span> = { tag: <span class="ss">"Point"</span> };
+
+<span class="sk">const</span> s = <span class="sf">Circle</span>(<span class="sn">5</span>);</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 6. Pattern Matching ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">6 · Pattern Matching</p>
+        <h2>Exhaustive match</h2>
+      </div>
+      <p>The compiler ensures every variant is handled. Add a variant to <code>Shape</code> and forget to update the <code>match</code>? Compile error — not a runtime surprise.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">func</span> <span class="sf">area</span>
+  <span class="st">:args</span> ((<span class="sf">s</span> <span class="st">:Shape</span>))
+  <span class="st">:returns</span> <span class="st">:number</span>
+  <span class="st">:body</span>
+  (<span class="sk">match</span> s
+    ((<span class="sf">Circle</span> r)  (* <span class="sf">Math:PI</span> r r))
+    ((<span class="sf">Rect</span> w h)  (* w h))
+    ((<span class="sf">Point</span>)     <span class="sn">0</span>)))</code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">function</span> <span class="sf">area</span>(s) {
+  <span class="sk">if</span> (s.tag === <span class="ss">"Circle"</span>) {
+    <span class="sk">const</span> r = s.radius;
+    <span class="sk">return</span> <span class="sf">Math</span>.PI * r * r;
+  }
+  <span class="sk">if</span> (s.tag === <span class="ss">"Rect"</span>) {
+    <span class="sk">return</span> s.w * s.h;
+  }
+  <span class="sk">return</span> <span class="sn">0</span>;
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 7. Cells ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">7 · Mutation</p>
+        <h2>Cells — Controlled Mutable State</h2>
+      </div>
+      <p>Mutation is explicit and visible. <code>cell</code> creates a mutable container. <code>swap!</code> updates it. <code>express</code> reads it. Every mutation wears a <code>!</code> suffix.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">bind</span> count (<span class="sk">cell</span> <span class="sn">0</span>))
+
+(<span class="sf">swap!</span> count
+  (<span class="sk">fn</span> (<span class="st">:number</span> n) (+ n <span class="sn">1</span>)))
+
+(<span class="sf">console:log</span> (<span class="sf">express</span> count))
+<span class="sc">;; → 1</span></code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">const</span> count = { value: <span class="sn">0</span> };
+
+count.value =
+  ((n) => n + <span class="sn">1</span>)(count.value);
+
+<span class="sf">console</span>.<span class="sf">log</span>(count.value);
+<span class="sc">// → 1</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 8. Threading ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">8 · Threading</p>
+        <h2>Data Pipelines</h2>
+      </div>
+      <p>Threading macros turn nested calls inside-out. <code>-></code> threads as the first argument; <code>->></code> threads as the last. <code>some-></code> short-circuits on <code>null</code>.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">bind</span> result
+  (<span class="sk">->></span> #a(<span class="sn">1 2 3 4 5 6 7 8 9 10</span>)
+    (<span class="sf">:filter</span> (<span class="sk">fn</span> (<span class="st">:number</span> n)
+                   (= (% n <span class="sn">2</span>) <span class="sn">0</span>)))
+    (<span class="sf">:map</span> (<span class="sk">fn</span> (<span class="st">:number</span> n)
+                 (* n <span class="sn">10</span>)))
+    (<span class="sf">:reduce</span> + <span class="sn">0</span>)))</code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">const</span> result =
+  [<span class="sn">1</span>, <span class="sn">2</span>, <span class="sn">3</span>, <span class="sn">4</span>, <span class="sn">5</span>, <span class="sn">6</span>, <span class="sn">7</span>, <span class="sn">8</span>, <span class="sn">9</span>, <span class="sn">10</span>]
+    .<span class="sf">filter</span>((n) => n % <span class="sn">2</span> === <span class="sn">0</span>)
+    .<span class="sf">map</span>((n) => n * <span class="sn">10</span>)
+    .<span class="sf">reduce</span>(
+      (a, b) => a + b, <span class="sn">0</span>);
+<span class="sc">// → 300</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 9. Modules ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">9 · Modules</p>
+        <h2>ES Modules</h2>
+      </div>
+      <p>Standard ESM. Named imports only — no namespace imports, no CommonJS. Explicit dependencies, always.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">import</span> <span class="ss">"./math.js"</span> (add multiply))
+(<span class="sk">export</span>
+  (<span class="sk">func</span> <span class="sf">calculate</span>
+    <span class="st">:args</span> ((<span class="sf">x</span> <span class="st">:number</span>)
+           (<span class="sf">y</span> <span class="st">:number</span>))
+    <span class="st">:returns</span> <span class="st">:number</span>
+    <span class="st">:body</span> (<span class="sf">add</span> (<span class="sf">multiply</span> x y) x)))</code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">import</span> { add, multiply } <span class="sk">from</span> <span class="ss">"./math.js"</span>;
+<span class="sk">export</span> <span class="sk">function</span> <span class="sf">calculate</span>(x, y) {
+  <span class="sk">return</span> <span class="sf">add</span>(<span class="sf">multiply</span>(x, y), x);
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── 10. Putting It Together ─── -->
+    <section class="stack" style="--space: var(--space-s);">
+      <div class="stack" style="--space: var(--space-3xs);">
+        <p class="caption">10 · All Together</p>
+        <h2>Option and Result</h2>
+      </div>
+      <p>Lykn provides <code>Option</code> and <code>Result</code> types for safe error handling. No null checks, no thrown exceptions for expected failures — just data and pattern matching.</p>
+      <div class="code-pair">
+        <div>
+          <p class="code-label">lykn</p>
+          <pre><code>(<span class="sk">type</span> <span class="sf">Option</span>
+  (<span class="sf">Some</span> <span class="st">:any</span> value)
+  <span class="sf">None</span>)
+
+(<span class="sk">func</span> <span class="sf">find-user</span>
+  <span class="st">:args</span> ((<span class="sf">id</span> <span class="st">:number</span>))
+  <span class="st">:returns</span> <span class="st">:Option</span>
+  <span class="st">:body</span>
+  (<span class="sk">if</span> (= id <span class="sn">1</span>)
+    (<span class="sf">Some</span> (<span class="sk">obj</span> <span class="st">:name</span> <span class="ss">"Duncan"</span>))
+    <span class="sf">None</span>))
+
+(<span class="sk">match</span> (<span class="sf">find-user</span> <span class="sn">1</span>)
+  ((<span class="sf">Some</span> user)
+    (<span class="sf">console:log</span> user:<span class="sf">name</span>))
+  (<span class="sf">None</span>
+    (<span class="sf">console:log</span> <span class="ss">"not found"</span>)))</code></pre>
+        </div>
+        <div>
+          <p class="code-label">javascript</p>
+          <pre><code><span class="sk">function</span> <span class="sf">Some</span>(value) {
+  <span class="sk">return</span> { tag: <span class="ss">"Some"</span>, value };
+}
+<span class="sk">const</span> <span class="sf">None</span> = { tag: <span class="ss">"None"</span> };
+
+<span class="sk">function</span> <span class="sf">findUser</span>(id) {
+  <span class="sk">if</span> (id === <span class="sn">1</span>)
+    <span class="sk">return</span> <span class="sf">Some</span>({ name: <span class="ss">"Duncan"</span> });
+  <span class="sk">return</span> <span class="sf">None</span>;
+}
+<span class="sk">const</span> t = <span class="sf">findUser</span>(<span class="sn">1</span>);
+<span class="sk">if</span> (t.tag === <span class="ss">"Some"</span>)
+  <span class="sf">console</span>.<span class="sf">log</span>(t.value.name);
+<span class="sk">else</span>
+  <span class="sf">console</span>.<span class="sf">log</span>(<span class="ss">"not found"</span>);</code></pre>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ─── CTA ─── -->
+    <section class="stack cta-block" style="--space: var(--space-s);">
+      <h2>Ready to Build?</h2>
+      <p class="subtitle">Install lykn and start writing. The <a href="https://github.com/lykn-lang/lykn">full book</a> covers everything from here through macros, the browser, servers, and the compiler internals.</p>
+      <div class="install-cmd">
+        <span class="prompt">$</span> cargo install lykn
+      </div>
+    </section>
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+---
+layout: default.liquid
+title: "Blog"
+description: "Updates, release notes, and essays from the lykn project."
+---
+
+<div class="center" style="--center-max: 48rem;">
+  <div class="stack page-block" style="--space: var(--space-l);">
+
+    <div class="stack" style="--space: var(--space-2xs);">
+      <p class="caption">Blog</p>
+      <h1>Updates</h1>
+      <p class="subtitle">Release notes, design decisions, and essays from the lykn project.</p>
+    </div>
+
+    {% for post in collections.posts.pages %}
+    <article class="stack blog-entry" style="--space: var(--space-3xs);">
+      <p class="caption">{{ post.published_date | date: "%Y-%m-%d" }}</p>
+      <h2><a href="{{ post.permalink }}">{{ post.title }}</a></h2>
+      {% if post.description %}
+      <p class="subtitle">{{ post.description }}</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+
+    {% if collections.posts.pages.size == 0 %}
+    <p class="subtitle empty-state">No posts yet. Check back after the first release.</p>
+    {% endif %}
+
+  </div>
+</div>
