@@ -16,7 +16,7 @@ description: "Updates, release notes, and essays from the lykn project."
     {% for post in collections.posts.pages %}
     <article class="stack blog-entry" style="--space: var(--space-3xs);">
       <p class="caption">{{ post.published_date | date: "%Y-%m-%d" }}</p>
-      <h2><a href="{{ post.permalink }}">{{ post.title }}</a></h2>
+      <h2><a href="/{{ post.permalink }}">{{ post.title }}</a></h2>
       {% if post.description %}
       <p class="subtitle">{{ post.description }}</p>
       {% endif %}

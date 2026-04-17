@@ -1,0 +1,7 @@
+{%- assign region = '' -%}
+{%- if page.permalink == 'index.html' -%}{%- assign region = 'home' -%}{%- endif -%}
+{%- if page.permalink contains 'tour/' -%}{%- assign region = 'tour' -%}{%- endif -%}
+{%- if page.permalink contains 'reference/' -%}{%- assign region = 'reference' -%}{%- endif -%}
+{%- if page.permalink contains 'playground/' -%}{%- assign region = 'playground' -%}{%- endif -%}
+{%- if page.permalink contains 'blog/' -%}{%- assign region = 'blog' -%}{%- endif -%}
+{%- if page.permalink contains 'posts/' -%}{%- assign region = 'blog' -%}{%- endif -%}

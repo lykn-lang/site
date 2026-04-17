@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include "head.liquid" %}
+{% include "region.liquid" %}
+<body{% if region != '' %} class="region-{{ region }}"{% endif %}>
+  {% include "nav.liquid" %}
+
+  <div class="page-wrap">
+    <main>
+      <div class="center" style="--center-max: 64rem;">
+        <article class="stack page-block post-content" style="--space: var(--space-l);">
+          <div class="stack" style="--space: var(--space-2xs);">
+            <p class="caption is-region-label">Blog</p>
+            <p class="caption">{{ page.published_date | date: "%B %d, %Y" }}</p>
+            <h1>{{ page.title }}</h1>
+            {% if page.description %}
+            <p class="subtitle">{{ page.description }}</p>
+            {% endif %}
+          </div>
+
+          <div class="stack prose" style="--space: var(--space-s);">
+            {{ page.content }}
+          </div>
+        </article>
+      </div>
+    </main>
+  </div>
+
+  {% include "footer.liquid" %}
+
+  <script src="/js/lykn-browser.js"></script>
+  <script src="/js/prose-highlight.js"></script>
+</body>
+</html>

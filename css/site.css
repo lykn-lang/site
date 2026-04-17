@@ -115,6 +115,7 @@
     --font-heading: 'IBM Plex Sans', system-ui, sans-serif;
     --font-caption: 'Space Grotesk', system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-prose: 'Newsreader', Georgia, serif;
 
     /* Utopia Type Scale: 360/16/1.2 → 1440/20/1.333 */
     --step--2: clamp(0.69rem, 0.65rem + 0.22vi, 0.80rem);
@@ -1035,6 +1036,83 @@ body:not(.region-home) .site-header::before {
     padding-block: var(--space-xl);
     text-align: center;
 }
+
+
+/* ── Blog post prose ───────────────────────────────────────── */
+
+.prose {
+    font-family: var(--font-prose);
+    font-size: var(--step--1);
+    font-variation-settings: 'opsz' 14;
+    line-height: 1.75;
+}
+
+.prose > * { max-inline-size: 48rem; }
+.prose pre { max-inline-size: 48rem; }
+
+.prose h2 {
+    margin-block-start: var(--space-l);
+    color: var(--accent-500);
+}
+
+.prose h3 {
+    margin-block-start: var(--space-m);
+    color: var(--accent-300);
+}
+
+.prose pre {
+    background: var(--surface-raised) !important;
+    border: 1px solid var(--border-subtle);
+}
+
+.prose pre code {
+    background: none !important;
+    font-family: var(--font-mono);
+}
+
+.prose code {
+    background: var(--surface-raised);
+    border-radius: 3px;
+    padding: 0.12em 0.3em;
+    font-size: 0.88em;
+    font-family: var(--font-mono);
+}
+
+.prose p + p {
+    margin-block-start: var(--space-xs);
+}
+
+.prose ul,
+.prose ol {
+    padding-inline-start: var(--space-m);
+    margin-block-start: var(--space-xs);
+}
+
+.prose li + li {
+    margin-block-start: var(--space-3xs);
+}
+
+.prose table {
+    border-collapse: collapse;
+    font-size: var(--step--1);
+    margin-block-start: var(--space-xs);
+}
+
+.prose th,
+.prose td {
+    padding: var(--space-3xs) var(--space-s);
+    border: 1px solid var(--border-subtle);
+    text-align: start;
+}
+
+.prose th {
+    background: var(--surface-raised);
+    font-weight: 500;
+}
+
+/* Syntax highlighting in prose is handled by /js/prose-highlight.js
+   which applies the same .sk/.sf/.ss/.sc/.sn/.st span classes used
+   on the Tour and Reference pages. Syntect is disabled in _cobalt.yml. */
 
 
 /* ── 404 page ──────────────────────────────────────────────── */
