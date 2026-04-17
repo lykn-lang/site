@@ -1,0 +1,269 @@
+---
+layout: default.liquid
+title: "Tuck In"
+description: "Everything you need to start writing lykn — from installing the toolchain to running your first program."
+---
+
+<div class="center" style="--center-max: 64rem;">
+  <div class="stack page-block" style="--space: var(--space-xl);">
+
+    <div class="stack" style="--space: var(--space-2xs);">
+      <p class="caption is-region-label">Getting Started</p>
+      <h1>Tuck In</h1>
+      <p class="subtitle">From zero to a running lykn project in five minutes. Prerequisites, installation, your first program, and the tools that keep your code clean.</p>
+    </div>
+
+
+    <!-- ─── Prerequisites ─── -->
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--violet-500);">
+      <h2>Prerequisites</h2>
+      <div class="stack ref-entries" style="--space: var(--space-s);">
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>Rust &amp; Cargo</h3>
+            <p class="subtitle">The lykn compiler is a Rust binary</p>
+          </div>
+          <pre><code><span class="sc"># Install Rust via rustup (if you don't have it)</span>
+<span class="sf">curl</span> --proto <span class="ss">'=https'</span> --tlsv1.2 -sSf https://sh.rustup.rs | <span class="sf">sh</span>
+
+<span class="sc"># Verify</span>
+<span class="sf">cargo</span> --version</code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>Deno</h3>
+            <p class="subtitle">Runtime for compiled JavaScript — not Node.js</p>
+          </div>
+          <pre><code><span class="sc"># macOS / Linux</span>
+<span class="sf">curl</span> -fsSL https://deno.land/install.sh | <span class="sf">sh</span>
+
+<span class="sc"># or via Homebrew</span>
+<span class="sf">brew</span> install deno
+
+<span class="sc"># Verify</span>
+<span class="sf">deno</span> --version</code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>Git</h3>
+            <p class="subtitle"><code>lykn new</code> initializes a git repo</p>
+          </div>
+          <pre><code><span class="sf">git</span> --version</code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>Make</h3>
+            <p class="subtitle">Optional — for the lykn project's own build system</p>
+          </div>
+          <pre><code><span class="sc"># macOS: included with Xcode Command Line Tools</span>
+<span class="sf">xcode-select</span> --install
+
+<span class="sc"># Linux: usually pre-installed, or</span>
+<span class="sf">sudo</span> apt install build-essential</code></pre>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ─── Install ─── -->
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--violet-300);">
+      <h2>Install lykn</h2>
+      <div class="stack ref-entries" style="--space: var(--space-s);">
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>From crates.io</h3>
+            <p class="subtitle">The standard install path</p>
+          </div>
+          <pre><code><span class="sf">cargo</span> install lykn-cli</code></pre>
+          <p>This installs the <code>lykn</code> binary. Verify it works:</p>
+          <pre><code><span class="sf">lykn</span> --version
+<span class="sf">lykn</span> --help</code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>From source</h3>
+            <p class="subtitle">For contributors or bleeding-edge</p>
+          </div>
+          <pre><code><span class="sf">git</span> clone https://github.com/lykn-lang/lykn.git
+<span class="sk">cd</span> lykn
+<span class="sf">make</span> build
+<span class="sc"># Binary lands in ./bin/lykn</span></code></pre>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ─── Create a Project ─── -->
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--violet-500);">
+      <h2>Create a Project</h2>
+      <div class="stack ref-entries" style="--space: var(--space-s);">
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3><code>lykn new</code></h3>
+            <p class="subtitle">Scaffolds a workspace with one package</p>
+          </div>
+          <pre><code><span class="sf">lykn</span> new my-app
+<span class="sk">cd</span> my-app</code></pre>
+          <p>This creates:</p>
+          <pre><code><span class="sc">my-app/</span>
+├── project.json              <span class="sc"># workspace root</span>
+├── packages/my-app/
+│   ├── deno.json             <span class="sc"># package config</span>
+│   └── mod.lykn              <span class="sc"># entry point</span>
+└── test/
+    └── mod.test.js           <span class="sc"># test stub</span></code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>The starter program</h3>
+            <p class="subtitle"><code>packages/my-app/mod.lykn</code></p>
+          </div>
+          <div class="code-pair">
+            <div>
+              <p class="code-label">lykn</p>
+              <pre><code><span class="sc">;; my-app — created with lykn new</span>
+
+(<span class="sk">bind</span> greeting <span class="ss">"Hello from my-app!"</span>)
+(<span class="sf">console:log</span> greeting)</code></pre>
+            </div>
+            <div>
+              <p class="code-label">compiled javascript</p>
+              <pre><code><span class="sk">const</span> <span class="sf">greeting</span> = <span class="ss">"Hello from my-app!"</span>;
+<span class="sf">console</span>.<span class="sf">log</span>(<span class="sf">greeting</span>);</code></pre>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ─── Format, Lint, Check ─── -->
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--violet-500);">
+      <h2>Format, Lint, Check</h2>
+      <div class="stack ref-entries" style="--space: var(--space-s);">
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3><code>lykn fmt</code></h3>
+            <p class="subtitle">Format lykn source files</p>
+          </div>
+          <pre><code><span class="sc"># Check formatting (dry run)</span>
+<span class="sf">lykn</span> fmt packages/my-app/mod.lykn
+
+<span class="sc"># Format in place</span>
+<span class="sf">lykn</span> fmt -w packages/my-app/mod.lykn</code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3><code>lykn check</code></h3>
+            <p class="subtitle">Validate syntax without compiling</p>
+          </div>
+          <pre><code><span class="sf">lykn</span> check packages/my-app/mod.lykn</code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3><code>lykn lint</code></h3>
+            <p class="subtitle">Lint compiled JavaScript via Deno</p>
+          </div>
+          <pre><code><span class="sf">lykn</span> lint packages/</code></pre>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ─── Testing ─── -->
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--violet-300);">
+      <h2>Testing</h2>
+      <div class="stack ref-entries" style="--space: var(--space-s);">
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3><code>lykn test</code></h3>
+            <p class="subtitle">Runs tests via Deno's built-in test runner</p>
+          </div>
+          <pre><code><span class="sc"># Run all tests</span>
+<span class="sf">lykn</span> test
+
+<span class="sc"># Run specific test files</span>
+<span class="sf">lykn</span> test test/mod.test.js</code></pre>
+          <p>Tests are written in JavaScript and import the compiled output. The scaffold includes <code>test/mod.test.js</code> to get you started.</p>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3>The full check</h3>
+            <p class="subtitle">Everything at once</p>
+          </div>
+          <pre><code><span class="sc"># Format → check → compile → test</span>
+<span class="sf">lykn</span> fmt -w packages/**/*.lykn
+<span class="sf">lykn</span> check packages/my-app/mod.lykn
+<span class="sf">lykn</span> compile packages/my-app/mod.lykn -o dist/mod.js
+<span class="sf">lykn</span> test</code></pre>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ─── Run It ─── -->
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--violet-300);">
+      <h2>Run It</h2>
+      <div class="stack ref-entries" style="--space: var(--space-s);">
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3><code>lykn run</code></h3>
+            <p class="subtitle">Compile and execute in one step</p>
+          </div>
+          <pre><code><span class="sf">lykn</span> run packages/my-app/mod.lykn
+<span class="sc"># → Hello from my-app!</span></code></pre>
+        </article>
+
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
+            <h3><code>lykn compile</code></h3>
+            <p class="subtitle">Compile to a <code>.js</code> file you can inspect</p>
+          </div>
+          <pre><code><span class="sc"># Compile to stdout</span>
+<span class="sf">lykn</span> compile packages/my-app/mod.lykn
+
+<span class="sc"># Compile to a file</span>
+<span class="sf">lykn</span> compile packages/my-app/mod.lykn -o dist/mod.js
+
+<span class="sc"># Production build (strip runtime type checks)</span>
+<span class="sf">lykn</span> compile packages/my-app/mod.lykn --strip-assertions -o dist/mod.js</code></pre>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ─── Next Steps ─── -->
+    <section class="stack cta-block" style="--space: var(--space-s);">
+      <h2>Next Steps</h2>
+      <p class="subtitle">You've got a running project. Here's where to go from here.</p>
+      <div class="stack" style="--space: var(--space-xs);">
+        <p><a href="/tour/">The Tour</a> — walk through the language in 10 interactive examples</p>
+        <p><a href="/reference/">Reference</a> — every form, every syntax, every compilation rule</p>
+        <p><a href="/playground/">Playground</a> — write lykn in your browser, see the compiled JS, run it</p>
+        <p><a href="https://cnbbooks.github.io/lykn">The Book</a> — the full story, from bindings through macros and compiler internals</p>
+        <p><a href="https://discord.gg/WFFNkZ7BRX">Discord</a> — come say hello</p>
+      </div>
+    </section>
+
+  </div>
+</div>

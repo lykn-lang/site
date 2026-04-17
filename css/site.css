@@ -42,6 +42,10 @@
     --neutral-400: oklch(72% 0.010 110);
     --neutral-300: oklch(82% 0.010 110);
 
+    --violet-700: oklch(38% 0.060 300);
+    --violet-500: oklch(55% 0.090 300);
+    --violet-300: oklch(72% 0.070 300);
+
     /* Semantic */
     --page-bg: oklch(15% 0.025 190);
     --surface-raised: var(--neutral-900);
@@ -189,6 +193,12 @@ body.region-book {
     --region-accent: var(--neutral-500);
     /* warm grey */
     --region-accent-dark: var(--neutral-700);
+}
+
+body.region-tuckin {
+    --region-accent: var(--violet-500);
+    /* soft violet */
+    --region-accent-dark: var(--violet-700);
 }
 
 
