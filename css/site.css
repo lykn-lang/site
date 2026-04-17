@@ -325,9 +325,13 @@ body:not(.region-home) h3 {
 
 /* Tour sections: h2 is the step label (uppercase, cycling section colour),
    h3 is the example title (region accent). */
+.tour-step + .tour-step,
+.ref-section + .ref-section {
+    padding-block-start: var(--space-xl);
+    border-block-start: 1px solid var(--border-subtle);
+}
+
 .tour-step> :first-child>h2 {
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
     font-weight: 500;
     color: var(--section-accent, var(--region-accent));
 }
