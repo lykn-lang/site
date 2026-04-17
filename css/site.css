@@ -72,6 +72,15 @@
   --editor-fg:     var(--text-primary);
   --editor-border: var(--border-default);
 
+  /* Footer surface — a shade darker than page-bg for contrast */
+  --footer-surface:   var(--neutral-950);
+  --footer-text:      var(--neutral-400);
+  --footer-text-dim:  var(--neutral-600);
+  --footer-heading:   var(--primary-100);
+  --footer-link:      var(--neutral-400);
+  --footer-link-hover: var(--primary-100);
+  --footer-border:    var(--neutral-800);
+
   /* Region (page-level) accent — wayfinding breadcrumb, NOT the interactive colour.
      Overridden per-page via body.region-* below. Default is home (amber). */
   --region-accent: var(--accent-500);
@@ -497,16 +506,115 @@ code {
 /* ── Footer ────────────────────────────────────────────────── */
 
 .site-footer {
-  padding: var(--space-l) 0;
-  border-block-start: 1px solid var(--border-subtle);
+  background: var(--footer-surface);
+  color: var(--footer-text);
   margin-block-start: var(--space-2xl);
+  position: relative;
+  overflow: hidden;
 }
-.site-footer p {
+.site-footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/lichen-footer.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 100%);
+  opacity: 0.10;
+  pointer-events: none;
+}
+
+.footer-inner {
+  position: relative;
+  max-inline-size: var(--page-max);
+  margin-inline: auto;
+  padding: var(--space-xl) var(--gutter) var(--space-l);
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-l) var(--space-xl);
+  padding-block-end: var(--space-l);
+}
+
+.footer-brand-col {
+  flex-basis: 240px;
+  flex-grow: 1;
+  max-inline-size: 300px;
+}
+
+.footer-brand-name {
+  font-family: var(--font-heading);
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--text-brand);
+  letter-spacing: 0.04em;
+  margin-block-end: var(--space-2xs);
+}
+
+.footer-tagline {
   font-family: var(--font-caption);
-  font-size: var(--step--2); font-weight: 300;
-  color: var(--text-secondary);
-  letter-spacing: 0.02em;
+  font-size: var(--step--1);
+  color: var(--footer-text-dim);
+  line-height: 1.5;
 }
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-l) var(--space-xl);
+  flex: 1;
+}
+
+.footer-col { min-inline-size: 140px; flex: 1; }
+
+.footer-col-title {
+  font-family: var(--font-caption);
+  font-size: var(--step--2);
+  font-weight: 500;
+  color: var(--footer-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-block-end: var(--space-xs);
+}
+
+.footer-col-list { list-style: none; }
+.footer-col-list li { margin-block-end: var(--space-3xs); }
+
+.footer-col-list a {
+  font-family: var(--font-caption);
+  font-size: var(--step--1);
+  color: var(--footer-link);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-col-list a:hover { color: var(--footer-link-hover); }
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2xs) var(--space-l);
+  padding-block-start: var(--space-m);
+  border-block-start: 1px solid var(--footer-border);
+}
+
+.footer-copyright,
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--footer-text-dim);
+}
+
+.footer-meta a {
+  color: var(--footer-text-dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-meta a:hover { color: var(--footer-link-hover); }
 
 
 /* ── Buttons ───────────────────────────────────────────────── */
