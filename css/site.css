@@ -43,7 +43,7 @@
     --neutral-300: oklch(82% 0.010 110);
 
     /* Semantic */
-    --page-bg: var(--primary-950);
+    --page-bg: oklch(15% 0.025 190);
     --surface-raised: var(--neutral-900);
     --surface-overlay: var(--primary-900);
     --text-primary: var(--primary-100);
@@ -179,9 +179,9 @@ body.region-playground {
 }
 
 body.region-blog {
-    --region-accent: var(--primary-700);
+    --region-accent: var(--primary-600);
     /* deep green */
-    --region-accent-dark: var(--primary-900);
+    --region-accent-dark: var(--primary-700);
 }
 
 body.region-book {
@@ -768,6 +768,7 @@ body:not(.region-home) .site-header::before {
     margin-block-start: var(--space-2xl);
     position: relative;
     overflow: hidden;
+    border-block-start: 0.5px solid oklch(28% 0.04 60);
 }
 
 .site-footer::before {
