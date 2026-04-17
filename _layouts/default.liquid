@@ -18,20 +18,20 @@
 {%- if page.permalink contains 'playground/' -%}{%- assign region = 'playground' -%}{%- endif -%}
 {%- if page.permalink contains 'blog/' -%}{%- assign region = 'blog' -%}{%- endif -%}
 <body{% if region != '' %} class="region-{{ region }}"{% endif %}>
-  <div class="page-wrap">
-    <header>
-      <nav class="site-nav">
-        <a href="/" class="logo">lykn</a>
-        <ul class="nav-links">
-          <li><a href="/tour/"{% if region == 'tour' %} class="is-current"{% endif %}>Tour</a></li>
-          <li><a href="/reference/"{% if region == 'reference' %} class="is-current"{% endif %}>Reference</a></li>
-          <li><a href="/playground/"{% if region == 'playground' %} class="is-current"{% endif %}>Playground</a></li>
-          <li><a href="/blog/"{% if region == 'blog' %} class="is-current"{% endif %}>Blog</a></li>
-          <li><a href="https://github.com/lykn-lang/lykn">GitHub</a></li>
-        </ul>
-      </nav>
-    </header>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="/" class="logo">lykn</a>
+      <ul class="nav-links">
+        <li><a href="/tour/"{% if region == 'tour' %} class="is-current"{% endif %}>Tour</a></li>
+        <li><a href="/reference/"{% if region == 'reference' %} class="is-current"{% endif %}>Reference</a></li>
+        <li><a href="/playground/"{% if region == 'playground' %} class="is-current"{% endif %}>Playground</a></li>
+        <li><a href="/blog/"{% if region == 'blog' %} class="is-current"{% endif %}>Blog</a></li>
+        <li><a href="https://github.com/lykn-lang/lykn">GitHub</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <div class="page-wrap">
     <main>
       {{ page.content }}
     </main>
