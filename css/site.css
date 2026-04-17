@@ -237,6 +237,18 @@ body:not(.region-home) h3 { font-size: var(--step-0); font-weight: 400; }
   color: var(--region-accent-dark);
 }
 
+/* Tour sections: h2 is the step label (uppercase, cycling section colour),
+   h3 is the example title (region accent). */
+.tour-step > :first-child > h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  color: var(--section-accent, var(--region-accent));
+}
+.tour-step h3 {
+  color: var(--region-accent);
+}
+
 a { color: var(--interactive); text-decoration: none; transition: color 0.15s; }
 a:hover { color: var(--interactive-hover); }
 
@@ -589,7 +601,6 @@ code {
    readable/scannable instead of template-y. Code examples get full line length. */
 .ref-entries > .ref-entry + .ref-entry {
   padding-block-start: var(--space-s);
-  border-block-start: 1px solid var(--border-subtle);
 }
 
 .ref-entry-head {
