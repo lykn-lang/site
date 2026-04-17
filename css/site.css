@@ -72,12 +72,17 @@
   --editor-fg:     var(--text-primary);
   --editor-border: var(--border-default);
 
+  /* Region (page-level) accent — wayfinding breadcrumb, NOT the interactive colour.
+     Overridden per-page via body.region-* below. Default is home (amber). */
+  --region-accent: var(--accent-500);
+  --region-accent-dark: var(--accent-700);
+
   /* Homepage hero surface — photographic lichen artwork at 20% opacity.
      Target file: 2880×1800 JPEG (16:10), focal point at 40% from top, centred horizontally, under 500KB.
      To revert to the synthetic CSS texture (useful before the photograph lands), swap `--hero-surface`
      for the radial-gradient stack preserved below and bump `--hero-surface-opacity` back to 1. */
   --hero-surface: url('/images/lichen-hero.jpg');
-  --hero-surface-opacity: 0.2;
+  --hero-surface-opacity: 0.15;
 
   /* Synthetic fallback — keep in sync with the photograph's tonal range if it ever needs reuse.
   --hero-surface:
@@ -134,6 +139,38 @@
 }
 
 
+/* ── Per-region wayfinding accents (Lynch) ─────────────────── */
+/* --region-accent      : base (nav underline)
+   --region-accent-dark : darker shade (page-label caption, step markers)
+   For non-home h1 tint we derive a LOW-SATURATION version of --region-accent
+   inline via oklch(from ...) — no token needed. */
+
+body.region-home {
+  --region-accent: var(--accent-500);        /* amber */
+  --region-accent-dark: var(--accent-700);
+}
+body.region-tour {
+  --region-accent: var(--primary-500);       /* moss green */
+  --region-accent-dark: var(--primary-700);
+}
+body.region-reference {
+  --region-accent: var(--secondary-500);     /* chartreuse */
+  --region-accent-dark: var(--secondary-700);
+}
+body.region-playground {
+  --region-accent: var(--primary-400);       /* teal-green */
+  --region-accent-dark: var(--primary-600);
+}
+body.region-blog {
+  --region-accent: var(--primary-700);       /* deep green */
+  --region-accent-dark: var(--primary-900);
+}
+body.region-book {
+  --region-accent: var(--neutral-500);       /* warm grey */
+  --region-accent-dark: var(--neutral-700);
+}
+
+
 /* ── Reset ─────────────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -168,6 +205,16 @@ h2 { font-size: var(--step-2); font-weight: 500; }
 h3 { font-size: var(--step-1); font-weight: 500; }
 h4 { font-size: var(--step-0); font-weight: 500; }
 
+/* Non-home pages: quieter headings, h1 tinted with a low-saturation region accent.
+   Home keeps the current sizes/weights so the front-page lineage + door titles are protected. */
+body:not(.region-home) h1 {
+  font-size: var(--step-3);
+  font-weight: 400;
+  color: oklch(from var(--region-accent) l calc(c * 0.5) h);
+}
+body:not(.region-home) h2 { font-size: var(--step-1); font-weight: 400; }
+body:not(.region-home) h3 { font-size: var(--step-0); font-weight: 400; }
+
 .subtitle {
   font-family: var(--font-caption);
   font-size: var(--step--1);
@@ -182,6 +229,12 @@ h4 { font-size: var(--step-0); font-weight: 500; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-secondary);
+}
+.caption.is-region-label { color: var(--region-accent-dark); }
+.caption.is-step-marker {
+  font-size: var(--step-0);
+  font-weight: 500;
+  color: var(--region-accent-dark);
 }
 
 a { color: var(--interactive); text-decoration: none; transition: color 0.15s; }
@@ -299,6 +352,11 @@ code {
 }
 .site-nav a { color: var(--text-secondary); }
 .site-nav a:hover { color: var(--text-primary); }
+.site-nav a.is-current {
+  color: var(--text-primary);
+  border-block-end: 2px solid var(--region-accent);
+  padding-block-end: 2px;
+}
 .nav-links { display: flex; gap: var(--space-s); list-style: none; }
 
 
@@ -526,6 +584,20 @@ code {
 /* ── Reference page sections ───────────────────────────────── */
 
 .ref-section > h2 { color: var(--section-accent); }
+
+/* Entries flow vertically, separated by a hairline rather than wrapped in cards —
+   readable/scannable instead of template-y. Code examples get full line length. */
+.ref-entries > .ref-entry + .ref-entry {
+  padding-block-start: var(--space-s);
+  border-block-start: 1px solid var(--border-subtle);
+}
+
+.ref-entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs) var(--space-s);
+  align-items: baseline;
+}
 
 
 /* ── Page layout helpers ───────────────────────────────────── */

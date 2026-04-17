@@ -11,16 +11,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 </head>
-<body>
+{%- assign region = '' -%}
+{%- if page.permalink == 'index.html' -%}{%- assign region = 'home' -%}{%- endif -%}
+{%- if page.permalink contains 'tour/' -%}{%- assign region = 'tour' -%}{%- endif -%}
+{%- if page.permalink contains 'reference/' -%}{%- assign region = 'reference' -%}{%- endif -%}
+{%- if page.permalink contains 'playground/' -%}{%- assign region = 'playground' -%}{%- endif -%}
+{%- if page.permalink contains 'blog/' -%}{%- assign region = 'blog' -%}{%- endif -%}
+<body{% if region != '' %} class="region-{{ region }}"{% endif %}>
   <div class="page-wrap">
     <header>
       <nav class="site-nav">
         <a href="/" class="logo">lykn</a>
         <ul class="nav-links">
-          <li><a href="/tour/">Tour</a></li>
-          <li><a href="/reference/">Reference</a></li>
-          <li><a href="/playground/">Playground</a></li>
-          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/tour/"{% if region == 'tour' %} class="is-current"{% endif %}>Tour</a></li>
+          <li><a href="/reference/"{% if region == 'reference' %} class="is-current"{% endif %}>Reference</a></li>
+          <li><a href="/playground/"{% if region == 'playground' %} class="is-current"{% endif %}>Playground</a></li>
+          <li><a href="/blog/"{% if region == 'blog' %} class="is-current"{% endif %}>Blog</a></li>
           <li><a href="https://github.com/lykn-lang/lykn">GitHub</a></li>
         </ul>
       </nav>

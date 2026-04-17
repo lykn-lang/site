@@ -8,272 +8,272 @@ description: "Every lykn form — syntax, compiled output, and what it does. The
   <div class="stack page-block" style="--space: var(--space-xl);">
 
     <div class="stack" style="--space: var(--space-2xs);">
-      <p class="caption">Reference</p>
+      <p class="caption is-region-label">Reference</p>
       <h1>Forms Reference</h1>
       <p class="subtitle">Every kernel and surface form, organized by category. Click any form for its full documentation in the book.</p>
     </div>
 
 
     <!-- ─── Bindings ─── -->
-    <section class="ref-section stack" style="--space: var(--space-s); --section-accent: var(--primary-400);">
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--primary-400);">
       <h2>Bindings</h2>
-      <div class="grid" style="--grid-min: 18rem;">
+      <div class="stack ref-entries" style="--space: var(--space-s);">
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>bind</code></h3>
             <p class="subtitle">Immutable binding → <code>const</code></p>
-            <pre><code>(<span class="sk">bind</span> name <span class="ss">"Duncan"</span>)</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">bind</span> name <span class="ss">"Duncan"</span>)</code></pre>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>bind</code> <span class="subtitle">with type</span></h3>
             <p class="subtitle">Typed binding with runtime check</p>
-            <pre><code>(<span class="sk">bind</span> <span class="st">:number</span> x (parse input))</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">bind</span> <span class="st">:number</span> x (parse input))</code></pre>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>cell</code></h3>
             <p class="subtitle">Mutable container → <code>{ value: x }</code></p>
-            <pre><code>(<span class="sk">bind</span> count (<span class="sk">cell</span> <span class="sn">0</span>))</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">bind</span> count (<span class="sk">cell</span> <span class="sn">0</span>))</code></pre>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>swap!</code> · <code>reset!</code> · <code>express</code></h3>
             <p class="subtitle">Cell operations</p>
-            <pre><code>(<span class="sf">swap!</span> count (<span class="sk">fn</span> (<span class="st">:number</span> n) (+ n <span class="sn">1</span>)))
+          </div>
+          <pre><code>(<span class="sf">swap!</span> count (<span class="sk">fn</span> (<span class="st">:number</span> n) (+ n <span class="sn">1</span>)))
 (<span class="sf">reset!</span> count <span class="sn">0</span>)
 (<span class="sf">express</span> count) <span class="sc">;; → current value</span></code></pre>
-          </div>
-        </div>
+        </article>
 
       </div>
     </section>
 
 
     <!-- ─── Functions ─── -->
-    <section class="ref-section stack" style="--space: var(--space-s); --section-accent: var(--secondary-500);">
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--secondary-500);">
       <h2>Functions</h2>
-      <div class="grid" style="--grid-min: 18rem;">
+      <div class="stack ref-entries" style="--space: var(--space-s);">
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>func</code></h3>
             <p class="subtitle">Named function → <code>function</code></p>
-            <pre><code>(<span class="sk">func</span> <span class="sf">add</span>
+          </div>
+          <pre><code>(<span class="sk">func</span> <span class="sf">add</span>
   <span class="st">:args</span> ((<span class="sf">a</span> <span class="st">:number</span>) (<span class="sf">b</span> <span class="st">:number</span>))
   <span class="st">:returns</span> <span class="st">:number</span>
   <span class="st">:body</span> (+ a b))</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>fn</code> · <code>lambda</code></h3>
             <p class="subtitle">Anonymous function → arrow / lambda</p>
-            <pre><code>(<span class="sk">fn</span> (<span class="st">:number</span> x) (* x <span class="sn">2</span>))</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">fn</span> (<span class="st">:number</span> x) (* x <span class="sn">2</span>))</code></pre>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>func</code> <span class="subtitle">multi-clause</span></h3>
             <p class="subtitle">Dispatch by type</p>
-            <pre><code>(<span class="sk">func</span> <span class="sf">describe</span>
+          </div>
+          <pre><code>(<span class="sk">func</span> <span class="sf">describe</span>
   (<span class="st">:args</span> ((<span class="sf">x</span> <span class="st">:string</span>)) <span class="st">:body</span> <span class="sc">...</span>)
   (<span class="st">:args</span> ((<span class="sf">x</span> <span class="st">:number</span>)) <span class="st">:body</span> <span class="sc">...</span>))</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>:pre</code> · <code>:post</code></h3>
             <p class="subtitle">Design by contract</p>
-            <pre><code>(<span class="sk">func</span> <span class="sf">withdraw</span>
+          </div>
+          <pre><code>(<span class="sk">func</span> <span class="sf">withdraw</span>
   <span class="st">:args</span> ((<span class="sf">amount</span> <span class="st">:number</span>))
   <span class="st">:pre</span>  ((> amount <span class="sn">0</span>))
   <span class="st">:body</span> <span class="sc">...</span>)</code></pre>
-          </div>
-        </div>
+        </article>
 
       </div>
     </section>
 
 
     <!-- ─── Data Types ─── -->
-    <section class="ref-section stack" style="--space: var(--space-s); --section-accent: var(--accent-500);">
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--accent-500);">
       <h2>Types &amp; Matching</h2>
-      <div class="grid" style="--grid-min: 18rem;">
+      <div class="stack ref-entries" style="--space: var(--space-s);">
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>type</code></h3>
             <p class="subtitle">Algebraic data type</p>
-            <pre><code>(<span class="sk">type</span> <span class="sf">Option</span>
+          </div>
+          <pre><code>(<span class="sk">type</span> <span class="sf">Option</span>
   (<span class="sf">Some</span> <span class="st">:any</span> value)
   <span class="sf">None</span>)</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>match</code></h3>
             <p class="subtitle">Exhaustive pattern matching</p>
-            <pre><code>(<span class="sk">match</span> opt
+          </div>
+          <pre><code>(<span class="sk">match</span> opt
   ((<span class="sf">Some</span> v) (<span class="sf">use</span> v))
   (<span class="sf">None</span> (<span class="sf">fallback</span>)))</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>match</code> <span class="subtitle">structural</span></h3>
             <p class="subtitle">Pattern match on plain objects</p>
-            <pre><code>(<span class="sk">match</span> response
+          </div>
+          <pre><code>(<span class="sk">match</span> response
   ((<span class="sk">obj</span> <span class="st">:ok</span> true <span class="st">:data</span> d) d)
   (_ (<span class="sf">handle-error</span>)))</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>obj</code></h3>
             <p class="subtitle">Object literal with keywords</p>
-            <pre><code>(<span class="sk">obj</span> <span class="st">:name</span> <span class="ss">"Duncan"</span>
-     <span class="st">:age</span> <span class="sn">42</span>)</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">obj</span> <span class="st">:name</span> <span class="ss">"Duncan"</span>
+     <span class="st">:age</span> <span class="sn">42</span>)</code></pre>
+        </article>
 
       </div>
     </section>
 
 
     <!-- ─── Control Flow ─── -->
-    <section class="ref-section stack" style="--space: var(--space-s); --section-accent: var(--primary-300);">
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--primary-300);">
       <h2>Control Flow</h2>
-      <div class="grid" style="--grid-min: 18rem;">
+      <div class="stack ref-entries" style="--space: var(--space-s);">
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>if</code></h3>
             <p class="subtitle">Conditional</p>
-            <pre><code>(<span class="sk">if</span> (> x <span class="sn">0</span>) <span class="ss">"positive"</span> <span class="ss">"non-positive"</span>)</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">if</span> (> x <span class="sn">0</span>) <span class="ss">"positive"</span> <span class="ss">"non-positive"</span>)</code></pre>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>if-let</code> · <code>when-let</code></h3>
             <p class="subtitle">Conditional binding</p>
-            <pre><code>(<span class="sk">if-let</span> (result (<span class="sf">find-user</span> id))
+          </div>
+          <pre><code>(<span class="sk">if-let</span> (result (<span class="sf">find-user</span> id))
   (<span class="sf">render</span> result)
   (<span class="sf">show-404</span>))</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>for-of</code> · <code>for-in</code> · <code>for</code></h3>
             <p class="subtitle">Iteration</p>
-            <pre><code>(<span class="sk">for-of</span> (item items)
-  (<span class="sf">console:log</span> item))</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">for-of</span> (item items)
+  (<span class="sf">console:log</span> item))</code></pre>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>try</code> · <code>catch</code> · <code>finally</code></h3>
             <p class="subtitle">Exception handling</p>
-            <pre><code>(<span class="sk">try</span>
+          </div>
+          <pre><code>(<span class="sk">try</span>
   (<span class="sf">risky-op</span>)
   (<span class="sk">catch</span> e (<span class="sf">handle</span> e))
   (<span class="sk">finally</span> (<span class="sf">cleanup</span>)))</code></pre>
-          </div>
-        </div>
+        </article>
 
       </div>
     </section>
 
 
     <!-- ─── Threading & Composition ─── -->
-    <section class="ref-section stack" style="--space: var(--space-s); --section-accent: var(--secondary-300);">
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--secondary-300);">
       <h2>Threading &amp; Composition</h2>
-      <div class="grid" style="--grid-min: 18rem;">
+      <div class="stack ref-entries" style="--space: var(--space-s);">
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>-></code> · <code>->></code></h3>
             <p class="subtitle">Thread first / thread last</p>
-            <pre><code>(<span class="sk">-></span> x (<span class="sf">f</span>) (<span class="sf">g</span>) (<span class="sf">h</span>))
-<span class="sc">;; → (h (g (f x)))</span></code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">-></span> x (<span class="sf">f</span>) (<span class="sf">g</span>) (<span class="sf">h</span>))
+<span class="sc">;; → (h (g (f x)))</span></code></pre>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>some-></code> · <code>some->></code></h3>
             <p class="subtitle">Nil-safe threading</p>
-            <pre><code>(<span class="sk">some-></span> user
+          </div>
+          <pre><code>(<span class="sk">some-></span> user
   (<span class="sf">:address</span>)
   (<span class="sf">:city</span>)
   (<span class="sf">:to-upper-case</span>))</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>assoc</code> · <code>dissoc</code> · <code>conj</code></h3>
             <p class="subtitle">Immutable updates</p>
-            <pre><code>(<span class="sf">assoc</span> user <span class="st">:name</span> <span class="ss">"New"</span>)
+          </div>
+          <pre><code>(<span class="sf">assoc</span> user <span class="st">:name</span> <span class="ss">"New"</span>)
 (<span class="sf">dissoc</span> user <span class="st">:temp</span>)
 (<span class="sf">conj</span> items new-item)</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>import</code> · <code>export</code></h3>
             <p class="subtitle">ES Modules</p>
-            <pre><code>(<span class="sk">import</span> <span class="ss">"./lib.js"</span> (add))
-(<span class="sk">export</span> (<span class="sk">bind</span> x <span class="sn">42</span>))</code></pre>
           </div>
-        </div>
+          <pre><code>(<span class="sk">import</span> <span class="ss">"./lib.js"</span> (add))
+(<span class="sk">export</span> (<span class="sk">bind</span> x <span class="sn">42</span>))</code></pre>
+        </article>
 
       </div>
     </section>
 
 
     <!-- ─── Async ─── -->
-    <section class="ref-section stack" style="--space: var(--space-s); --section-accent: var(--neutral-400);">
+    <section class="ref-section stack" style="--space: var(--space-m); --section-accent: var(--neutral-400);">
       <h2>Async &amp; Interop</h2>
-      <div class="grid" style="--grid-min: 18rem;">
+      <div class="stack ref-entries" style="--space: var(--space-s);">
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>async</code> · <code>await</code></h3>
             <p class="subtitle">Async functions</p>
-            <pre><code>(<span class="sk">async</span> (<span class="sk">func</span> <span class="sf">fetch-data</span>
+          </div>
+          <pre><code>(<span class="sk">async</span> (<span class="sk">func</span> <span class="sf">fetch-data</span>
   <span class="st">:body</span>
   (<span class="sk">bind</span> res (<span class="sk">await</span> (<span class="sf">fetch</span> url)))
   (<span class="sk">await</span> (res:<span class="sf">json</span>))))</code></pre>
-          </div>
-        </div>
+        </article>
 
-        <div class="box">
-          <div class="stack" style="--space: var(--space-3xs);">
+        <article class="stack ref-entry" style="--space: var(--space-2xs);">
+          <div class="ref-entry-head">
             <h3><code>js:</code> <span class="subtitle">namespace</span></h3>
             <p class="subtitle">Escape to raw JS operations</p>
-            <pre><code>(<span class="sf">js:type-of</span> x)
+          </div>
+          <pre><code>(<span class="sf">js:type-of</span> x)
 (<span class="sf">js:instance-of</span> x <span class="sf">Array</span>)
 (<span class="sf">js:void</span> <span class="sn">0</span>)</code></pre>
-          </div>
-        </div>
+        </article>
 
       </div>
     </section>

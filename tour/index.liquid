@@ -8,7 +8,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
   <div class="stack page-block" style="--space: var(--space-xl);">
 
     <div class="stack" style="--space: var(--space-2xs);">
-      <p class="caption">Language Tour</p>
+      <p class="caption is-region-label">Language Tour</p>
       <h1>Learn lykn in 10 Examples</h1>
       <p class="subtitle">Each example shows the lykn source and its compiled JavaScript output.<br>No runtime, no magic — just parentheses in, clean JS out.</p>
     </div>
@@ -17,7 +17,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
     <!-- ─── 1. Hello World ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">1 · Bindings</p>
+        <p class="caption is-step-marker">1 · Bindings</p>
         <h2>Hello, World</h2>
       </div>
       <p><code>bind</code> creates an immutable binding. It compiles to <code>const</code> — always. Colon syntax (<code>console:log</code>) compiles to dot notation.</p>
@@ -39,7 +39,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
     <!-- ─── 2. Functions ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">2 · Functions</p>
+        <p class="caption is-step-marker">2 · Functions</p>
         <h2>Named Functions with Contracts</h2>
       </div>
       <p><code>func</code> defines named functions with keyword-labeled clauses. Type annotations compile to runtime checks in development, stripped in production.</p>
@@ -71,7 +71,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
     <!-- ─── 3. Anonymous Functions ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">3 · Lambdas</p>
+        <p class="caption is-step-marker">3 · Lambdas</p>
         <h2>Anonymous Functions</h2>
       </div>
       <p><code>fn</code> creates arrow functions. Type annotations work the same way. Use them everywhere a callback is needed.</p>
@@ -105,7 +105,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
     <!-- ─── 4. Closures ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">4 · Closures</p>
+        <p class="caption is-step-marker">4 · Closures</p>
         <h2>Functions Remember Their Context</h2>
       </div>
       <p>Because <code>bind</code> is immutable, closures are safe. The captured value never changes behind the function's back.</p>
@@ -141,7 +141,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
     <!-- ─── 5. Algebraic Data Types ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">5 · Types</p>
+        <p class="caption is-step-marker">5 · Types</p>
         <h2>Algebraic Data Types</h2>
       </div>
       <p><code>type</code> defines variants with named, typed fields. Each variant compiles to a constructor function returning a tagged object. Zero-field variants are constants.</p>
@@ -176,7 +176,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
     <!-- ─── 6. Pattern Matching ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">6 · Pattern Matching</p>
+        <p class="caption is-step-marker">6 · Pattern Matching</p>
         <h2>Exhaustive match</h2>
       </div>
       <p>The compiler ensures every variant is handled. Add a variant to <code>Shape</code> and forget to update the <code>match</code>? Compile error — not a runtime surprise.</p>
@@ -212,7 +212,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
     <!-- ─── 7. Cells ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">7 · Mutation</p>
+        <p class="caption is-step-marker">7 · Mutation</p>
         <h2>Cells — Controlled Mutable State</h2>
       </div>
       <p>Mutation is explicit and visible. <code>cell</code> creates a mutable container. <code>swap!</code> updates it. <code>express</code> reads it. Every mutation wears a <code>!</code> suffix.</p>
@@ -244,7 +244,7 @@ count.value =
     <!-- ─── 8. Threading ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">8 · Threading</p>
+        <p class="caption is-step-marker">8 · Threading</p>
         <h2>Data Pipelines</h2>
       </div>
       <p>Threading macros turn nested calls inside-out. <code>-></code> threads as the first argument; <code>->></code> threads as the last. <code>some-></code> short-circuits on <code>null</code>.</p>
@@ -276,7 +276,7 @@ count.value =
     <!-- ─── 9. Modules ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">9 · Modules</p>
+        <p class="caption is-step-marker">9 · Modules</p>
         <h2>ES Modules</h2>
       </div>
       <p>Standard ESM. Named imports only — no namespace imports, no CommonJS. Explicit dependencies, always.</p>
@@ -305,7 +305,7 @@ count.value =
     <!-- ─── 10. Putting It Together ─── -->
     <section class="stack" style="--space: var(--space-s);">
       <div class="stack" style="--space: var(--space-3xs);">
-        <p class="caption">10 · All Together</p>
+        <p class="caption is-step-marker">10 · All Together</p>
         <h2>Option and Result</h2>
       </div>
       <p>Lykn provides <code>Option</code> and <code>Result</code> types for safe error handling. No null checks, no thrown exceptions for expected failures — just data and pattern matching.</p>
