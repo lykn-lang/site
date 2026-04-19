@@ -51,7 +51,7 @@ That colon syntax -- `console:log` -- is one of my favorite things about lykn. C
 
 ```lisp
 (func greet
-  :args ((name :string))
+  :args (:string name)
   :returns :string
   :body (template "Hello, " name "!"))
 

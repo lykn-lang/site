@@ -68,7 +68,7 @@ description: "Every lykn form — syntax, compiled output, and what it does. The
             <p class="subtitle">Named function → <code>function</code></p>
           </div>
           <pre><code>(<span class="sk">func</span> <span class="sf">add</span>
-  <span class="st">:args</span> ((<span class="sf">a</span> <span class="st">:number</span>) (<span class="sf">b</span> <span class="st">:number</span>))
+  <span class="st">:args</span> (<span class="st">:number</span> <span class="sf">a</span> <span class="st">:number</span> <span class="sf">b</span>)
   <span class="st">:returns</span> <span class="st">:number</span>
   <span class="st">:body</span> (+ a b))</code></pre>
         </article>
@@ -87,8 +87,8 @@ description: "Every lykn form — syntax, compiled output, and what it does. The
             <p class="subtitle">Dispatch by type</p>
           </div>
           <pre><code>(<span class="sk">func</span> <span class="sf">describe</span>
-  (<span class="st">:args</span> ((<span class="sf">x</span> <span class="st">:string</span>)) <span class="st">:body</span> <span class="sc">...</span>)
-  (<span class="st">:args</span> ((<span class="sf">x</span> <span class="st">:number</span>)) <span class="st">:body</span> <span class="sc">...</span>))</code></pre>
+  (<span class="st">:args</span> (<span class="st">:string</span> <span class="sf">x</span>) <span class="st">:body</span> <span class="sc">...</span>)
+  (<span class="st">:args</span> (<span class="st">:number</span> <span class="sf">x</span>) <span class="st">:body</span> <span class="sc">...</span>))</code></pre>
         </article>
 
         <article class="stack ref-entry" style="--space: var(--space-2xs);">
@@ -97,8 +97,8 @@ description: "Every lykn form — syntax, compiled output, and what it does. The
             <p class="subtitle">Design by contract</p>
           </div>
           <pre><code>(<span class="sk">func</span> <span class="sf">withdraw</span>
-  <span class="st">:args</span> ((<span class="sf">amount</span> <span class="st">:number</span>))
-  <span class="st">:pre</span>  ((> amount <span class="sn">0</span>))
+  <span class="st">:args</span> (<span class="st">:number</span> <span class="sf">amount</span>)
+  <span class="st">:pre</span> (> amount <span class="sn">0</span>)
   <span class="st">:body</span> <span class="sc">...</span>)</code></pre>
         </article>
 
@@ -182,7 +182,7 @@ description: "Every lykn form — syntax, compiled output, and what it does. The
             <h3><code>for-of</code> · <code>for-in</code> · <code>for</code></h3>
             <p class="subtitle">Iteration</p>
           </div>
-          <pre><code>(<span class="sk">for-of</span> (item items)
+          <pre><code>(<span class="sk">for-of</span> item items
   (<span class="sf">console:log</span> item))</code></pre>
         </article>
 
@@ -270,9 +270,9 @@ description: "Every lykn form — syntax, compiled output, and what it does. The
             <h3><code>js:</code> <span class="subtitle">namespace</span></h3>
             <p class="subtitle">Escape to raw JS operations</p>
           </div>
-          <pre><code>(<span class="sf">js:type-of</span> x)
-(<span class="sf">js:instance-of</span> x <span class="sf">Array</span>)
-(<span class="sf">js:void</span> <span class="sn">0</span>)</code></pre>
+          <pre><code>(<span class="sf">js:typeof</span> x)
+(<span class="sf">js:eq</span> x null)
+(<span class="sf">js:eval</span> <span class="ss">"1 + 2"</span>)</code></pre>
         </article>
 
       </div>

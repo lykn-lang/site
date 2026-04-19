@@ -58,7 +58,7 @@ Each variant is a constructor function returning a tagged object. Zero-field var
 
 ```lisp
 (func area
-  :args ((s :Shape))
+  :args (:any s)
   :returns :number
   :body
   (match s
@@ -84,8 +84,8 @@ These work exactly like you'd expect from Rust or OCaml, but compile to plain Ja
 
 ```lisp
 (func factorial
-  (:args ((n :number)) :returns :number
-   :pre ((>= n 0))
+  (:args (:number n) :returns :number
+   :pre (>= n 0)
    :body
    (if (= n 0) 1 (* n (factorial (- n 1))))))
 ```
@@ -96,8 +96,8 @@ Multi-clause dispatch lets you write functions with multiple signatures:
 
 ```lisp
 (func describe
-  (:args ((s :string)) :body (template "string: " s))
-  (:args ((n :number)) :body (template "number: " n)))
+  (:args (:string s) :body (template "string: " s))
+  (:args (:number n) :body (template "number: " n)))
 ```
 
 ## Threading macros
@@ -150,8 +150,8 @@ Sometimes you need to drop down to raw JavaScript constructs. The `js:` namespac
 
 ```lisp
 (js:typeof x)          ;; --> typeof x
-(js:instanceof obj Cls) ;; --> obj instanceof Cls
-(js:void 0)            ;; --> void 0
+(js:eq x null)         ;; --> x == null
+(js:eval "1 + 2")      ;; --> eval("1 + 2")
 ```
 
 This keeps the interop explicit and greppable without polluting the core language.

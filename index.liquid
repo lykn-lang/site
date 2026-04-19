@@ -20,7 +20,7 @@ description: "S-expression syntax compiling to clean, readable JavaScript. No ru
         <p class="code-label">lykn</p>
         <pre><code><span class="sc">;; Type-checked at dev time, zero-cost in production</span>
 (<span class="sk">func</span> <span class="sf">greet</span>
-  <span class="st">:args</span> ((<span class="sf">name</span> <span class="st">:string</span>))
+  <span class="st">:args</span> (<span class="st">:string</span> <span class="sf">name</span>)
   <span class="st">:returns</span> <span class="st">:string</span>
   <span class="st">:body</span> (<span class="sk">template</span> <span class="ss">"Hello, "</span> name <span class="ss">"!"</span>))
 
@@ -64,8 +64,10 @@ description: "S-expression syntax compiling to clean, readable JavaScript. No ru
   (<span class="sf">Rect</span>   <span class="st">:number</span> w <span class="st">:number</span> h))
 
 (<span class="sk">func</span> <span class="sf">area</span>
-  (<span class="st">:args</span> ((<span class="sf">s</span> <span class="st">:Shape</span>)) <span class="st">:returns</span> <span class="st">:number</span>
-   <span class="st">:body</span> (<span class="sk">match</span> s
+  <span class="st">:args</span> (<span class="st">:any</span> <span class="sf">s</span>)
+  <span class="st">:returns</span> <span class="st">:number</span>
+  <span class="st">:body</span>
+  (<span class="sk">match</span> s
      ((<span class="sf">Circle</span> r) (* <span class="sf">Math:PI</span> r r))
      ((<span class="sf">Rect</span> w h) (* w h)))))</code></pre>
     </a>

@@ -47,7 +47,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
         <div>
           <p class="code-label">lykn</p>
           <pre><code>(<span class="sk">func</span> <span class="sf">greet</span>
-  <span class="st">:args</span> ((<span class="sf">name</span> <span class="st">:string</span>))
+  <span class="st">:args</span> (<span class="st">:string</span> <span class="sf">name</span>)
   <span class="st">:returns</span> <span class="st">:string</span>
   <span class="st">:body</span>
   (<span class="sk">template</span> <span class="ss">"Hello, "</span> name <span class="ss">"!"</span>))
@@ -113,7 +113,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
         <div>
           <p class="code-label">lykn</p>
           <pre><code>(<span class="sk">func</span> <span class="sf">make-greeter</span>
-  <span class="st">:args</span> ((<span class="sf">prefix</span> <span class="st">:string</span>))
+  <span class="st">:args</span> (<span class="st">:string</span> <span class="sf">prefix</span>)
   <span class="st">:returns</span> <span class="st">:function</span>
   <span class="st">:body</span>
   (<span class="sk">fn</span> (<span class="st">:string</span> name)
@@ -184,7 +184,7 @@ description: "Walk through lykn in 10 interactive examples. Every one compiles t
         <div>
           <p class="code-label">lykn</p>
           <pre><code>(<span class="sk">func</span> <span class="sf">area</span>
-  <span class="st">:args</span> ((<span class="sf">s</span> <span class="st">:Shape</span>))
+  <span class="st">:args</span> (<span class="st">:any</span> <span class="sf">s</span>)
   <span class="st">:returns</span> <span class="st">:number</span>
   <span class="st">:body</span>
   (<span class="sk">match</span> s
@@ -286,8 +286,7 @@ count.value =
           <pre><code>(<span class="sk">import</span> <span class="ss">"./math.js"</span> (add multiply))
 (<span class="sk">export</span>
   (<span class="sk">func</span> <span class="sf">calculate</span>
-    <span class="st">:args</span> ((<span class="sf">x</span> <span class="st">:number</span>)
-           (<span class="sf">y</span> <span class="st">:number</span>))
+    <span class="st">:args</span> (<span class="st">:number</span> <span class="sf">x</span> <span class="st">:number</span> <span class="sf">y</span>)
     <span class="st">:returns</span> <span class="st">:number</span>
     <span class="st">:body</span> (<span class="sf">add</span> (<span class="sf">multiply</span> x y) x)))</code></pre>
         </div>
@@ -317,8 +316,8 @@ count.value =
   <span class="sf">None</span>)
 
 (<span class="sk">func</span> <span class="sf">find-user</span>
-  <span class="st">:args</span> ((<span class="sf">id</span> <span class="st">:number</span>))
-  <span class="st">:returns</span> <span class="st">:Option</span>
+  <span class="st">:args</span> (<span class="st">:number</span> <span class="sf">id</span>)
+  <span class="st">:returns</span> <span class="st">:any</span>
   <span class="st">:body</span>
   (<span class="sk">if</span> (= id <span class="sn">1</span>)
     (<span class="sf">Some</span> (<span class="sk">obj</span> <span class="st">:name</span> <span class="ss">"Duncan"</span>))
