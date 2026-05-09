@@ -47,7 +47,7 @@
     --violet-300: oklch(72% 0.070 300);
 
     /* Semantic */
-    --page-bg: oklch(15% 0.025 190);
+    --page-bg: oklch(20% 0.025 210);
     --surface-raised: var(--neutral-900);
     --surface-overlay: var(--primary-900);
     --text-primary: var(--primary-100);
@@ -530,6 +530,7 @@ code {
 .site-header {
     position: relative;
     overflow: hidden;
+    background: oklch(15% 0.025 210);
     border-block-end: 1px solid var(--border-subtle);
 }
 
