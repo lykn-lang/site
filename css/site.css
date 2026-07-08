@@ -1126,6 +1126,68 @@ body:not(.region-home) .site-header::before {
    on the Tour and Reference pages. Syntect is disabled in _cobalt.yml. */
 
 
+/* ── Marketing: Togs ───────────────────────────────────────── */
+
+/* T-shirt back mock-up. The code block reproduces the homepage
+   Learn door's *resting* colouring: syntax spans keep their usual
+   colours and plain tokens (parens, params) take the interactive
+   amber — but statically. No anchor wrapper, no hover shift: the
+   print doesn't change colour when you point at the shirt. */
+
+.tee-mockup {
+    background: var(--footer-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px;
+    padding: var(--space-l) var(--space-m) var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-m-l);
+}
+
+.tee-slogan {
+    font-family: var(--font-caption);
+    font-size: var(--step-3);
+    font-weight: 500;
+    color: var(--text-brand);
+    text-align: center;
+    text-wrap: balance;
+}
+
+/* Link lists on the togs page: bullet markers sit flush with the
+   paragraph text edge (no default ul indent), with a hanging indent
+   so wrapped lines align under the text, not the bullet. */
+.tog-list {
+    list-style: none;
+    padding-inline-start: 0;
+}
+
+.tog-list li {
+    padding-inline-start: 1.5ch;
+    text-indent: -1.5ch;
+}
+
+.tog-list li::before {
+    content: '\2022\00a0';
+}
+
+/* Overline above the slogan. Colour is page-bg lifted two shades
+   (the site's scales step ~8% lightness per shade), keeping the
+   page-bg teal hue. Still a placeholder — iterate from here. */
+.tee-overline {
+    font-family: 'Literata', Georgia, serif;
+    font-size: var(--step-0);
+    color: oklch(from var(--page-bg) calc(l + 0.16) c h);
+    text-align: center;
+}
+
+.tee-mockup pre {
+    border: none;
+    background: transparent;
+    color: var(--interactive);
+}
+
+
 /* ── 404 page ──────────────────────────────────────────────── */
 
 .display-glyph {

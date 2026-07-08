@@ -1,0 +1,100 @@
+---
+layout: default.liquid
+title: "Togs — lykn Apparel"
+description: "High fashion from a tiny backwater country in the Land of Lisp"
+---
+
+<div class="center" style="--center-max: 64rem;">
+  <div class="stack page-block" style="--space: var(--space-xl);">
+
+    <div class="stack" style="--space: var(--space-2xs);">
+      <p class="caption is-region-label">Marketing</p>
+      <h1>Togs</h1>
+      <p class="subtitle" style="font-size: var(--step-1);"><em>High fashion from a tiny backwater country in the Land of Lisp</em></p>
+    </div>
+
+    <div class="stack" style="--space: var(--space-2xs);">
+      <h2>T-Shirt The First</h2>
+      <p class="subtitle">The first lykn T-shirt. Mock-ups below; print-your-own assets to follow once the design settles.</p>
+    </div>
+
+    <!-- ─── The Front ─── -->
+    <section class="stack" style="--space: var(--space-2xs);">
+      <h3>The Front</h3>
+      <p class="subtitle">A lichen miniature by Vigd&iacute;s, left breast. Small, quiet, and doing more work
+      than it lets on: lichens are bioindicator species &mdash; they grow only where the air
+      is clean &mdash; and every lichen is a symbiosis, two organisms making one body.
+      The artwork lands here as soon as it is ready for print.</p>
+    </section>
+
+    <img src="/images/togs/t-shirt2-front.png" />
+
+    <!-- ─── The Back ─── -->
+    <section class="stack" style="--space: var(--space-m);">
+      <div class="stack" style="--space: var(--space-2xs);">
+        <h3>The Back</h3>
+        <p class="subtitle">A slogan up top, and below it the code — the proof. Implicit counts.<br>The bar: looks good &middot; makes sense &middot; high amusement value &middot; fits on a back.</p>
+      </div>
+
+    <img src="/images/togs/t-shirt2-back.png" />
+
+      <div class="stack" style="--space: var(--space-2xs);">
+        <p class="code-label">the symbiont</p>
+        <div class="tee-mockup">
+          <div class="stack" style="--space: var(--space-3xs);">
+            <p class="tee-overline">ADTs &middot; Lisp Macros &middot; ECMAScript-compatibility &middot; Rust compiler</p>
+            <p class="tee-slogan">A language of SYMBIOSIS</p>
+          </div>
+          <pre><code><span class="sc">;;; audit.lykn — security AND beauty ... by design</span>
+
+(<span class="sk">import</span> <span class="ss">"./trust.js"</span> (vetted? ship refuse))
+
+(<span class="sk">type</span> <span class="sf">Outcome</span>
+  (<span class="sf">Ok</span> <span class="st">:any</span> value)
+  (<span class="sf">Err</span> <span class="st">:string</span> reason))
+
+(<span class="sk">bind</span> dep (<span class="sk">obj</span> <span class="st">:name</span> <span class="ss">"left-pad"</span> <span class="st">:from</span> <span class="ss">"npm"</span>))
+
+(<span class="sk">func</span> <span class="sf">audit</span>
+  <span class="st">:args</span> (<span class="st">:object</span> dep)
+  <span class="st">:body</span> (<span class="sk">if</span> (<span class="sf">vetted?</span> dep)
+          (<span class="sf">Ok</span> dep)
+          (<span class="sf">Err</span> <span class="ss">"supply chain"</span>)))
+
+(<span class="sk">export</span> (names <span class="sf">audit</span>))
+
+(<span class="sk">match</span> (<span class="sf">audit</span> dep)
+  ((<span class="sf">Ok</span> v)  (<span class="sf">ship</span> v))
+  ((<span class="sf">Err</span> e) (<span class="sf">refuse</span> e)))</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Get One ─── -->
+    <section class="stack" style="--space: var(--space-2xs);">
+      <h3>Get One</h3>
+      <p>Round one is real: a tee, a tank, and a hoodie are on their way to lykn world
+      headquarters. The designs live at Custom Ink, who will happily print a single
+      shirt these days &mdash; order away:</p>
+      <ul class="tog-list">
+        <li><a href="https://www.customink.com/designs/Lykn%20T-shirt%20(unisex)/ewh0-00d2-v9cr/share?pc=EMAIL-40778&amp;utm_campaign=shared%20design&amp;utm_source=share%20link&amp;utm_medium=shared%20design&amp;utm_content=shared%20desktop">Lykn T-shirt</a> (unisex)</li>
+        <li><a href="https://www.customink.com/designs/Lykn%20Tank%20(womens)/ewh0-00d2-v9hk/share?pc=EMAIL-40778&amp;utm_campaign=shared%20design&amp;utm_source=share%20link&amp;utm_medium=shared%20design&amp;utm_content=shared%20desktop">Lykn Tank</a> (women&rsquo;s)</li>
+        <li><a href="https://www.customink.com/designs/Lykn%20Ballcap/ewh0-00d2-v9kd/share?pc=EMAIL-40778&amp;utm_campaign=shared%20design&amp;utm_source=share%20link&amp;utm_medium=shared%20design&amp;utm_content=shared%20desktop">Lykn Ballcap</a></li>
+        <li><a href="https://www.customink.com/designs/Lykn%20Hoodie/ewh0-00d2-v9n9/share?pc=EMAIL-40778&amp;utm_campaign=shared%20design&amp;utm_source=share%20link&amp;utm_medium=shared%20design&amp;utm_content=shared%20desktop">Lykn Hoodie</a> (front design only)</li>
+      </ul>
+    </section>
+
+    <!-- ─── Print Your Own ─── -->
+    <section class="stack" style="--space: var(--space-2xs);">
+      <h3>Print Your Own</h3>
+      <p>Prefer your own print shop? The hi-res assets:</p>
+      <ul class="tog-list">
+        <li><a href="/images/togs/tee-back-x6000.png">The back design</a> &mdash; 6000&nbsp;px PNG</li>
+        <li><a href="/images/togs/Avatar-x3000-rounded-signature-text.png">The front miniature</a> &mdash; lichen by Vigd&iacute;s, 3000&nbsp;px PNG, signed</li>
+      </ul>
+      <p>Colours are sRGB conversions of the site&rsquo;s OKLCH design tokens.
+      Dark fabric recommended &mdash; the colours above were grown on it.</p>
+    </section>
+
+  </div>
+</div>
