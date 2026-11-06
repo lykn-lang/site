@@ -606,6 +606,27 @@ body:not(.region-home) .site-header::before {
     overflow: hidden;
 }
 
+/* Subtle light edges follow the artwork's fade down to transparent. */
+.hero-encounter::before,
+.hero-encounter::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inline-size: 1px;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to bottom,
+        oklch(from var(--page-bg) calc(l + 0.10) c h) 30%, transparent 100%);
+}
+
+.hero-encounter::before {
+    inset-inline-start: 0;
+}
+
+.hero-encounter::after {
+    inset-inline-end: 0;
+}
+
 .hero-bg {
     position: absolute;
     inset: 0;
