@@ -1099,6 +1099,7 @@ body:not(.region-home) .site-header::before {
 
 .prose pre code {
     background: none !important;
+    padding: 0;
     font-family: var(--font-mono);
 }
 
